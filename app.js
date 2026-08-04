@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tools: 'Adobe Photoshop, Lightroom'
     },
     'tulu-lipi': {
-      title: 'Tulu Lipi Kalpuga branding',
+      title: 'Tulu Lipi Kalpuga Poster',
       tags: 'Typography / Calligraphy / Visual Design',
       description: 'A cultural branding and lettering project designed to teach and promote regional script learning ("Tulu Lipi Kalpuga"). Features organic, hand-crafted calligraphic assets set against a dark textured green background. The visual system establishes a warm, academic, and accessible identity designed to preserve and celebrate local heritage across web and print materials.',
       images: [
@@ -41,7 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 1. Lenis Smooth Scroll Setup
   let lenis;
-  if (typeof Lenis !== 'undefined') {
+
+  function initLenis() {
+    if (typeof Lenis === 'undefined') return;
     lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -55,14 +57,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function raf(time) {
-      lenis.raf(time);
+      if (lenis) lenis.raf(time);
       requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
 
-    // Sync GSAP ScrollTrigger with Lenis
-    lenis.on('scroll', ScrollTrigger.update);
+    if (typeof ScrollTrigger !== 'undefined') {
+      lenis.on('scroll', ScrollTrigger.update);
+    }
   }
+
+  initLenis();
 
   // 2. Custom Cursor & Follower Logic
   const cursor = document.querySelector('.custom-cursor');
@@ -196,26 +201,28 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Hero title text parallax scroll trigger
-    gsap.to('.hero-bg-text-back', {
-      scrollTrigger: {
-        trigger: '.hero-section',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true
-      },
-      yPercent: -15
-    });
+    // Hero title text parallax scroll trigger - Desktop only
+    if (isDesktop) {
+      gsap.to('.hero-bg-text-back', {
+        scrollTrigger: {
+          trigger: '.hero-section',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        },
+        yPercent: -15
+      });
 
-    gsap.to('.hero-bg-text-front', {
-      scrollTrigger: {
-        trigger: '.hero-section',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true
-      },
-      yPercent: 15
-    });
+      gsap.to('.hero-bg-text-front', {
+        scrollTrigger: {
+          trigger: '.hero-section',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        },
+        yPercent: 15
+      });
+    }
 
     // Staggered fade-up for section headers and work cards
     const fadeUpTriggers = ['.section-header', '.work-item', '.service-item', '.about-container', '.contact-wrap'];
@@ -244,7 +251,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('projectModal');
   const modalClose = document.querySelector('.close-modal-btn');
   const modalOverlay = document.querySelector('.modal-overlay');
+  const modalWrapper = document.querySelector('.modal-content-wrapper');
   const projectCards = document.querySelectorAll('.work-item');
+
+  // Intercept wheel events inside modal so Lenis doesn't block them
+  if (modalWrapper) {
+    modalWrapper.addEventListener('wheel', (e) => {
+      e.stopPropagation();
+    }, { passive: true });
+
+    // Fix touch scroll on mobile inside modal
+    let touchStartY = 0;
+    modalWrapper.addEventListener('touchstart', (e) => {
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    modalWrapper.addEventListener('touchmove', (e) => {
+      e.stopPropagation();
+    }, { passive: true });
+  }
 
   function openProjectModal(projectId) {
     const data = projectDatabase[projectId];
@@ -267,13 +292,20 @@ document.addEventListener('DOMContentLoaded', () => {
       mediaContainer.appendChild(img);
     });
 
+    // Reset modal scroll to top
+    modal.scrollTop = 0;
+
     // Show modal
     modal.classList.add('active');
-    if (lenis) lenis.stop(); // Stop scroll behind modal
-    document.body.style.overflow = 'hidden';
+
+    // Destroy lenis completely so its event listeners don't block modal scroll
+    if (lenis) {
+      lenis.destroy();
+      lenis = null;
+    }
 
     // Animate content up
-    gsap.fromTo('.modal-content', 
+    gsap.fromTo('.modal-content',
       { y: 80, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.8, ease: 'power4.out', delay: 0.1 }
     );
@@ -287,8 +319,9 @@ document.addEventListener('DOMContentLoaded', () => {
       ease: 'power3.in',
       onComplete: () => {
         modal.classList.remove('active');
-        if (lenis) lenis.start(); // Resume scroll
-        document.body.style.overflow = '';
+        modal.scrollTop = 0;
+        // Reinitialize lenis for smooth page scrolling
+        initLenis();
       }
     });
   }
@@ -301,8 +334,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  modalClose.addEventListener('click', closeProjectModal);
-  modalOverlay.addEventListener('click', closeProjectModal);
+  // Close modal on clicking outside content (on the modal backdrop area)
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeProjectModal();
+  });
 
   // Close modal with Escape key
   document.addEventListener('keydown', (e) => {
