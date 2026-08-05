@@ -36,6 +36,26 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
       deliverables: 'Custom Calligraphy Assets, Brand Identity System, Educational Poster',
       tools: 'Procreate, Adobe Illustrator'
+    },
+    'ancient-vibe': {
+      title: 'The Ancient Vibe',
+      tags: 'Event Poster / Typography / Visual Design',
+      description: 'A mystical event poster crafted for "The Ancient Vibe", presented by The Infinity Tech, Digital Athnology, and Harmonic Science under the Save The Root initiative. The design merges a dramatic ancient Indian temple backdrop with a glowing geometric zodiac wheel, channeling a cinematic spiritual energy. Bold chrome 3D typography commands the center, creating a powerful contrast between heritage and modern design aesthetics.',
+      images: [
+        'assets/assetsancient_vibe.jpeg'
+      ],
+      deliverables: 'Event Poster, Typography Layout, Digital Asset',
+      tools: 'Adobe Photoshop, Adobe Illustrator'
+    },
+    'tudar': {
+      title: 'Tudar — NITTE Cultural Fest',
+      tags: 'Event Design / Cultural Branding / Poster',
+      description: 'A vibrant event promotional poster designed for "Tudar", the Tulu cultural fest organized at NMAM Institute of Technology, NITTE. The composition features an ornate scroll element set against a rich green backdrop, celebrating the Tulu community\'s heritage. The bilingual layout blends Tulu script with English, presenting a warm and festive invitation to the cultural gathering. The design incorporates traditional motifs and the official NITTE branding.',
+      images: [
+        'assets/assetstudar_poster.jpeg'
+      ],
+      deliverables: 'Event Poster, Bilingual Layout, Cultural Branding Asset',
+      tools: 'Adobe Photoshop, Adobe Illustrator'
     }
   };
 
