@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'assets/tshirt_mockup.png',
         'assets/captain_america_print.png'
       ],
-      deliverables: 'Apparel Print Layout, Vector Illustration, Fabric Mockup',
-      tools: 'Adobe Photoshop, Adobe Illustrator'
+      deliverables: 'Apparel Print Layout, Fabric Mockup',
+      tools: 'Adobe Photoshop'
     },
     'conquest': {
       title: 'The Conquest Poster',
@@ -30,12 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
     'tulu-lipi': {
       title: 'Tulu Lipi Kalpuga Poster',
       tags: 'Typography / Calligraphy / Visual Design',
-      description: 'A cultural branding and lettering project designed to teach and promote regional script learning ("Tulu Lipi Kalpuga"). Features organic, hand-crafted calligraphic assets set against a dark textured green background. The visual system establishes a warm, academic, and accessible identity designed to preserve and celebrate local heritage across web and print materials.',
+      description: 'A cultural project designed to teach and promote regional script learning ("Tulu Lipi Kalpuga"). Features organic, hand-crafted calligraphic assets set against a dark textured green background. The visual system establishes a warm, academic, and accessible identity designed to preserve and celebrate local heritage across web and print materials.',
       images: [
         'assets/tulu_lipi.jpg'
       ],
       deliverables: 'Custom Calligraphy Assets, Brand Identity System, Educational Poster',
-      tools: 'Procreate, Adobe Illustrator'
+      tools: 'Procreate, Adobe Photoshop'
     },
     'ancient-vibe': {
       title: 'The Ancient Vibe',
@@ -48,14 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
       tools: 'Adobe Photoshop, Adobe Illustrator'
     },
     'tudar': {
-      title: 'Tudar — NITTE Cultural Fest',
+      title: 'Tudar club Registration poster',
       tags: 'Event Design / Cultural Branding / Poster',
       description: 'A vibrant event promotional poster designed for "Tudar", the Tulu cultural fest organized at NMAM Institute of Technology, NITTE. The composition features an ornate scroll element set against a rich green backdrop, celebrating the Tulu community\'s heritage. The bilingual layout blends Tulu script with English, presenting a warm and festive invitation to the cultural gathering. The design incorporates traditional motifs and the official NITTE branding.',
       images: [
         'assets/assetstudar_poster.jpeg'
       ],
       deliverables: 'Event Poster, Bilingual Layout, Cultural Branding Asset',
-      tools: 'Adobe Photoshop, Adobe Illustrator'
+      tools: 'Adobe Photoshop'
     }
   };
 
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('mousemove', (e) => {
       cursorX = e.clientX;
       cursorY = e.clientY;
-      
+
       // Move main cursor instantly
       cursor.style.left = `${cursorX}px`;
       cursor.style.top = `${cursorY}px`;
@@ -158,8 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
           y: y * 0.35,
           duration: 0.3,
           ease: 'power2.out'
+        });
       });
-    });
 
       el.addEventListener('mouseleave', () => {
         gsap.to(el, {
@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fadeUpTriggers.forEach(selector => {
       const elements = document.querySelectorAll(selector);
       elements.forEach(element => {
-        gsap.fromTo(element, 
+        gsap.fromTo(element,
           { y: 60, opacity: 0 },
           {
             y: 0,
