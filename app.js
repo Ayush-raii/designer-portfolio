@@ -327,6 +327,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Bind triggers
+  if (modalClose) modalClose.addEventListener('click', closeProjectModal);
+
   projectCards.forEach(card => {
     card.addEventListener('click', () => {
       const pId = card.getAttribute('data-project');
