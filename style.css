@@ -1211,14 +1211,23 @@ section {
   }
 
   .contact-title {
-    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    font-size: clamp(1.6rem, 7vw, 2rem);
     word-break: break-word;
     overflow-wrap: break-word;
+    hyphens: auto;
   }
 
   .accent-text {
     display: inline;
     word-break: break-word;
     overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .contact-section,
+  .contact-wrap,
+  .contact-header {
+    overflow-x: hidden;
+    max-width: 100%;
   }
 }
