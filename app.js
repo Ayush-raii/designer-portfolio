@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       images: [
         'assets/tulu_lipi.jpg'
       ],
-      deliverables: 'Custom Calligraphy Assets, Brand Identity System, Educational Poster',
+      deliverables: 'Custom Calligraphy Assets,collrge club poster, Educational Poster',
       tools: 'Procreate, Adobe Photoshop'
     },
     'ancient-vibe': {
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'assets/assetsancient_vibe.jpeg'
       ],
       deliverables: 'Event Poster, Typography Layout, Digital Asset',
-      tools: 'Adobe Photoshop, Adobe Illustrator'
+      tools: 'Adobe Photoshop'
     },
     'tudar': {
       title: 'Tudar club Registration poster',
