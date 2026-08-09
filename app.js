@@ -6,6 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Project Database
   const projectDatabase = {
+    'dhurandhar': {
+      title: 'DURANDHAR film Poster',
+      tags: 'movive/cinimatic / Poster',
+      description: 'A cinematic poster design inspired by "Dhurandhar", created as a personal exploration of movie-poster design and visual storytelling. The composition combines bold red typography, metallic gold lettering, dramatic imagery, deep shadows, and distressed textures to create a dark and intense cinematic atmosphere. The design focuses on strong visual hierarchy, with the "REVENGE" typography forming a powerful background element while the "DHURANDHAR" title takes center stage in the foreground. The project showcases photo manipulation, typography styling, color grading, texture work, lighting, and composition, created entirely as a personal graphic design concept.',
+      images: [
+        'assets/durandar.png',
+        'assets/breif-durandar.png',
+      ],
+      deliverables: 'Cinematic Movie Poster, Typography Design, Photo Manipulation, Visual Storytelling Asset',
+      tools: 'Adobe Photoshop'
+    },
     'captain-america': {
       title: 'Captain America Apparel',
       tags: 'Apparel / Illustration / Print',
@@ -101,6 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('mousemove', (e) => {
       cursorX = e.clientX;
       cursorY = e.clientY;
+
+      cursor.style.opacity = '1';
+      follower.style.opacity = '1';
 
       // Move main cursor instantly
       cursor.style.left = `${cursorX}px`;
@@ -361,11 +375,163 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === modal) closeProjectModal();
   });
 
-  // Close modal with Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) {
-      closeProjectModal();
-    }
+  // Category Filter Engine (Option 1)
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const workItems = document.querySelectorAll('.work-item');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterValue = btn.getAttribute('data-filter');
+
+      workItems.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        if (filterValue === 'all' || itemCategory === filterValue) {
+          item.classList.remove('hidden');
+          if (typeof gsap !== 'undefined') {
+            gsap.fromTo(item, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+          }
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
   });
+
+  // Interactive & Persistent Review System (Option 3 Dynamic)
+  const addReviewForm = document.getElementById('add-review-form');
+  const reviewsContainer = document.getElementById('reviews-container');
+  const noReviewsMsg = document.getElementById('no-reviews-msg');
+  const starBtns = document.querySelectorAll('.star-btn');
+  const ratingInput = document.getElementById('reviewer-rating');
+
+  // Interactive Star Selection
+  if (starBtns.length > 0) {
+    starBtns.forEach(star => {
+      star.addEventListener('click', () => {
+        const rating = star.getAttribute('data-rating');
+        ratingInput.value = rating;
+
+        starBtns.forEach(s => {
+          if (parseInt(s.getAttribute('data-rating')) <= parseInt(rating)) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
+      });
+    });
+  }
+
+  // Load Reviews from LocalStorage
+  function loadSavedReviews() {
+    const saved = localStorage.getItem('rai_portfolio_reviews');
+    const reviews = saved ? JSON.parse(saved) : [];
+
+    if (!reviewsContainer) return;
+
+    reviewsContainer.innerHTML = '';
+
+    if (reviews.length === 0) {
+      if (noReviewsMsg) noReviewsMsg.style.display = 'block';
+    } else {
+      if (noReviewsMsg) noReviewsMsg.style.display = 'none';
+
+      reviews.forEach((r) => {
+        const starsStr = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+        const card = document.createElement('div');
+        card.className = 'review-card';
+        card.innerHTML = `
+          <div class="review-stars">${starsStr}</div>
+          <p class="review-text">"${escapeHtml(r.text)}"</p>
+          <div class="review-author">
+            <span class="author-name">${escapeHtml(r.name)}</span>
+            <span class="author-role">${escapeHtml(r.role || 'Visitor')}</span>
+          </div>
+        `;
+        reviewsContainer.appendChild(card);
+      });
+    }
+  }
+
+  // Admin Helper: Expose deleteReview to browser console for Admin control
+  window.deleteReview = function (index) {
+    const existing = JSON.parse(localStorage.getItem('rai_portfolio_reviews') || '[]');
+    if (index >= 0 && index < existing.length) {
+      const removed = existing.splice(index, 1);
+      localStorage.setItem('rai_portfolio_reviews', JSON.stringify(existing));
+      loadSavedReviews();
+      console.log(`✅ Admin: Removed review by "${removed[0].name}"`);
+    } else {
+      console.log(`❌ Admin: Review at index ${index} not found.`);
+    }
+  };
+
+  window.deleteReviewByName = function (reviewerName) {
+    const existing = JSON.parse(localStorage.getItem('rai_portfolio_reviews') || '[]');
+    const filtered = existing.filter(r => r.name.toLowerCase() !== reviewerName.toLowerCase());
+    localStorage.setItem('rai_portfolio_reviews', JSON.stringify(filtered));
+    loadSavedReviews();
+    console.log(`✅ Admin: Removed reviews matching name "${reviewerName}"`);
+  };
+
+  function escapeHtml(str) {
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  // Review Modal Popup Logic
+  const openReviewModalBtn = document.getElementById('open-review-modal-btn');
+  const closeReviewModalBtn = document.getElementById('close-review-modal-btn');
+  const reviewModal = document.getElementById('review-modal');
+
+  function openReviewModal() {
+    if (reviewModal) reviewModal.classList.add('active');
+  }
+
+  function closeReviewModal() {
+    if (reviewModal) reviewModal.classList.remove('active');
+  }
+
+  if (openReviewModalBtn) openReviewModalBtn.addEventListener('click', openReviewModal);
+  if (closeReviewModalBtn) closeReviewModalBtn.addEventListener('click', closeReviewModal);
+
+  if (reviewModal) {
+    reviewModal.addEventListener('click', (e) => {
+      if (e.target === reviewModal) closeReviewModal();
+    });
+  }
+
+  // Handle Form Submission
+  if (addReviewForm) {
+    addReviewForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('reviewer-name').value.trim();
+      const role = document.getElementById('reviewer-role').value.trim();
+      const rating = parseInt(document.getElementById('reviewer-rating').value) || 5;
+      const text = document.getElementById('reviewer-text').value.trim();
+
+      if (!name || !text) return;
+
+      const newReview = { name, role, rating, text, date: new Date().toISOString() };
+
+      const existing = JSON.parse(localStorage.getItem('rai_portfolio_reviews') || '[]');
+      existing.unshift(newReview); // Newest review on top
+      localStorage.setItem('rai_portfolio_reviews', JSON.stringify(existing));
+
+      // Reset form
+      addReviewForm.reset();
+      ratingInput.value = '5';
+      starBtns.forEach(s => s.classList.add('active'));
+
+      // Close Modal and Re-render reviews list
+      closeReviewModal();
+      loadSavedReviews();
+    });
+  }
+
+  loadSavedReviews();
 
 });

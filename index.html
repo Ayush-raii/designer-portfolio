@@ -16,7 +16,7 @@
     rel="stylesheet">
 
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=16">
+  <link rel="stylesheet" href="style.css?v=18">
 </head>
 
 <body>
@@ -42,6 +42,7 @@
         <nav class="nav-links">
           <a href="#work" class="nav-link magnetic">Work</a>
           <a href="#about" class="nav-link magnetic">About</a>
+          <a href="#reviews" class="nav-link magnetic">Reviews</a>
           <a href="#contact" class="nav-link magnetic">Contact</a>
         </nav>
       </div>
@@ -75,9 +76,30 @@
           aesthetics and meticulous detail.</div>
       </div>
 
+      <!-- Simple Category Filter -->
+      <div class="work-filter-bar">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="poster">Posters</button>
+        <button class="filter-btn" data-filter="apparel">Apparel & Merch</button>
+        <button class="filter-btn" data-filter="typography">Typography & Culture</button>
+      </div>
+
       <div class="work-grid">
-        <!-- Project 1: Captain America Apparel -->
-        <div class="work-item" data-project="captain-america">
+        <!-- Project 1: DURANDHAR Poster Apparel -->
+        <div class="work-item" data-project="dhurandhar" data-category="poster">
+          <div class="work-img-container">
+            <img src="assets/durandar.png" alt="DURANDHAR  mockup" class="work-img main-img">
+            <div class="work-overlay">
+              <span class="view-project-btn">View Case</span>
+            </div>
+          </div>
+          <div class="work-info">
+            <div class="work-tags">DURANDHAR /Movie/ Poster</div>
+            <h3 class="work-name">DURANDHAR</h3>
+          </div>
+        </div>
+        <!-- Project 2: Captain America Apparel -->
+        <div class="work-item" data-project="captain-america" data-category="apparel">
           <div class="work-img-container">
             <img src="assets/tshirt_mockup.png" alt="Captain America Apparel Mockup" class="work-img main-img">
             <img src="assets/captain_america_print.png" alt="Captain America Design Print" class="work-img hover-img">
@@ -91,8 +113,8 @@
           </div>
         </div>
 
-        <!-- Project 2: The Conquest -->
-        <div class="work-item" data-project="conquest">
+        <!-- Project 3: The Conquest -->
+        <div class="work-item" data-project="conquest" data-category="poster">
           <div class="work-img-container">
             <img src="assets/virat_conquest.png" alt="The Conquest Poster" class="work-img">
             <div class="work-overlay">
@@ -105,8 +127,8 @@
           </div>
         </div>
 
-        <!-- Project 3: Tulu Lipi Kalpuga -->
-        <div class="work-item" data-project="tulu-lipi">
+        <!-- Project 4: Tulu Lipi Kalpuga -->
+        <div class="work-item" data-project="tulu-lipi" data-category="typography">
           <div class="work-img-container">
             <img src="assets/tulu_lipi.jpg" alt="Tulu Lipi Kalpuga Poster" class="work-img">
             <div class="work-overlay">
@@ -119,8 +141,8 @@
           </div>
         </div>
 
-        <!-- Project 4: The Ancient Vibe -->
-        <div class="work-item" data-project="ancient-vibe">
+        <!-- Project 5: The Ancient Vibe -->
+        <div class="work-item" data-project="ancient-vibe" data-category="poster">
           <div class="work-img-container">
             <img src="assets/assetsancient_vibe.jpeg" alt="The Ancient Vibe Event Poster" class="work-img">
             <div class="work-overlay">
@@ -133,8 +155,8 @@
           </div>
         </div>
 
-        <!-- Project 5: Tudar NITTE Cultural Fest -->
-        <div class="work-item" data-project="tudar">
+        <!-- Project 6: Tudar NITTE Cultural Fest -->
+        <div class="work-item" data-project="tudar" data-category="typography">
           <div class="work-img-container">
             <img src="assets/assetstudar_poster.jpeg" alt="Tudar NITTE Cultural Fest Poster" class="work-img">
             <div class="work-overlay">
@@ -170,7 +192,7 @@
             <div class="service-num">01</div>
             <div class="service-detail">
               <h4>Brand Identity</h4>
-              <p>Designing modern, scalable, and impactful visual identities, logos, and style guidelines that speak
+              <p>Designing modern, scalable, and impactful visual identities and style guidelines that speak
                 louder than words.</p>
             </div>
           </div>
@@ -229,11 +251,71 @@
       </div>
     </section>
 
+    <!-- Client Reviews / Ratings Section -->
+    <section id="reviews" class="reviews-section">
+      <div class="section-header reviews-header-flex">
+        <div class="section-title-wrap">
+          <span class="section-num">03 /</span>
+          <h2 class="section-title">Client & Visitor Reviews</h2>
+        </div>
+        <button id="open-review-modal-btn" class="write-review-trigger-btn magnetic">
+          <span>+ Write a Review</span>
+        </button>
+      </div>
+
+      <!-- Reviews Container -->
+      <div id="reviews-container" class="reviews-grid">
+        <!-- Reviews will appear here dynamically -->
+      </div>
+      <div id="no-reviews-msg" class="no-reviews-msg">No reviews yet. Be the first to leave a review!</div>
+    </section>
+
+    <!-- Review Modal Popup -->
+    <div id="review-modal" class="review-modal-overlay">
+      <div class="review-modal-content">
+        <button id="close-review-modal-btn" class="close-review-modal">&times;</button>
+        <div class="review-modal-header">
+          <span class="review-modal-num">03 / REVIEW</span>
+          <h3 class="review-modal-title">Leave Your Feedback</h3>
+          <p class="review-modal-sub">Share your experience working with Rai Labs.</p>
+        </div>
+        <form id="add-review-form" class="review-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reviewer-name">Your Name / Company *</label>
+              <input type="text" id="reviewer-name" placeholder="e.g. Alex Morgan / Brand Lead" required>
+            </div>
+            <div class="form-group">
+              <label for="reviewer-role">Your Title / Project Type</label>
+              <input type="text" id="reviewer-role" placeholder="e.g. Poster Client / Visitor">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Rating *</label>
+            <div class="star-rating-select">
+              <span class="star-btn active" data-rating="5">★</span>
+              <span class="star-btn active" data-rating="4">★</span>
+              <span class="star-btn active" data-rating="3">★</span>
+              <span class="star-btn active" data-rating="2">★</span>
+              <span class="star-btn active" data-rating="1">★</span>
+            </div>
+            <input type="hidden" id="reviewer-rating" value="5">
+          </div>
+          <div class="form-group">
+            <label for="reviewer-text">Your Review / Feedback *</label>
+            <textarea id="reviewer-text" rows="4" placeholder="Share your experience or feedback..."
+              required></textarea>
+          </div>
+          <button type="submit" class="submit-review-btn">Post Review</button>
+        </form>
+      </div>
+    </div>
+
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
       <div class="contact-wrap">
         <div class="contact-header">
-          <span class="section-num">03 /</span>
+          <span class="section-num">04 /</span>
           <h2 class="contact-title">Let's craft something<br><span class="accent-text">extraordinary<br>together.</span>
           </h2>
           <p class="contact-sub">Have a project, a collaboration opportunity, or just want to chat about design? Reach
@@ -252,7 +334,7 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Your Name</label>
-                <input type="text" id="name" required placeholder="John Doe">
+                <input type="text" id="name" required placeholder="John">
               </div>
               <div class="form-group">
                 <label for="email">Your Email</label>
