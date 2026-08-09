@@ -103,6 +103,37 @@ body {
   animation: preloaderTextIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
 }
 
+.preloader-logo .preloader-word {
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .preloader-logo {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .preloader-logo .preloader-word {
+    display: block;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: preloaderTextIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .preloader-logo .preloader-word:nth-child(1) {
+    animation-delay: 0.15s;
+  }
+
+  .preloader-logo .preloader-word:nth-child(2) {
+    animation-delay: 0.45s;
+  }
+
+  .preloader-sub {
+    animation-delay: 0.8s !important;
+  }
+}
+
 .preloader-sub {
   font-size: clamp(0.75rem, 2vw, 0.95rem);
   letter-spacing: 0.2em;
@@ -307,6 +338,7 @@ body {
   text-align: center;
   pointer-events: none;
   white-space: nowrap;
+  padding: 0 0.08em;
 }
 
 .hero-bg-text-back {
@@ -318,7 +350,7 @@ body {
 .hero-bg-text-front {
   color: var(--text-primary);
   bottom: 12%;
-  z-index: 2;
+  z-index: 15;
   text-shadow: 0 20px 40px rgba(0, 0, 0, 0.85);
 }
 
@@ -329,8 +361,8 @@ body {
   transform: translateX(-50%);
   z-index: 10;
   width: 100%;
-  max-width: 680px;
-  height: 82vh;
+  max-width: 780px;
+  height: 88vh;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -339,7 +371,7 @@ body {
 
 .hero-portrait {
   position: relative;
-  z-index: 12;
+  z-index: 10;
   width: auto;
   height: 100%;
   max-width: 100%;
@@ -1315,6 +1347,8 @@ section {
     height: 62vh;
     max-width: 380px;
     bottom: 20%;
+    left: 55%;
+    transform: translateX(-50%);
   }
 
   .modal-content-wrapper {

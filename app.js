@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (typeof gsap !== 'undefined') {
         gsap.from('.hero-portrait', { opacity: 0, y: 60, duration: 1.2, delay: 0.2, ease: 'power3.out' });
       }
-    }, 1200);
+    }, 1800);
   }
 
   // Project Database
