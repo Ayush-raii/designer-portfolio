@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Project Database
   const projectDatabase = {
     'dhurandhar': {
-      title: 'DURANDHAR film Poster',
+      title: 'DHURANDHAR film Poster',
       tags: 'movive/cinimatic / Poster',
       description: 'A cinematic poster design inspired by "Dhurandhar", created as a personal exploration of movie-poster design and visual storytelling. The composition combines bold red typography, metallic gold lettering, dramatic imagery, deep shadows, and distressed textures to create a dark and intense cinematic atmosphere. The design focuses on strong visual hierarchy, with the "REVENGE" typography forming a powerful background element while the "DHURANDHAR" title takes center stage in the foreground. The project showcases photo manipulation, typography styling, color grading, texture work, lighting, and composition, created entirely as a personal graphic design concept.',
       images: [
