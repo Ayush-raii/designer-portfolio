@@ -4,6 +4,17 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // 0. RAI LABS Animated Title Intro Reveal
+  const preloader = document.getElementById('preloader');
+  if (preloader) {
+    setTimeout(() => {
+      preloader.classList.add('loaded');
+      if (typeof gsap !== 'undefined') {
+        gsap.from('.hero-portrait', { opacity: 0, y: 60, duration: 1.2, delay: 0.2, ease: 'power3.out' });
+      }
+    }, 1200);
+  }
+
   // Project Database
   const projectDatabase = {
     'dhurandhar': {

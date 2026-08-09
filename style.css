@@ -63,6 +63,64 @@ body {
   background: var(--text-secondary);
 }
 
+/* Preloader Screen */
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0c0c0e;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1), visibility 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.preloader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.preloader-logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  letter-spacing: 0.15em;
+  color: var(--text-primary);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: preloaderTextIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
+}
+
+.preloader-sub {
+  font-size: clamp(0.75rem, 2vw, 0.95rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-top: 0.8rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: preloaderTextIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
+}
+
+@keyframes preloaderTextIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Grainy Paper Overlay Texture */
 .grain-overlay {
   position: fixed;
