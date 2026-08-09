@@ -534,4 +534,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   loadSavedReviews();
 
+  // Mobile Navigation Drawer Toggle
+  const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+  const navMenuLinks = document.querySelectorAll('.nav-links .nav-link');
+
+  if (mobileNavToggle && navMenu) {
+    mobileNavToggle.addEventListener('click', () => {
+      mobileNavToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // Close mobile nav menu when any link is clicked
+    navMenuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNavToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+  }
+
 });
