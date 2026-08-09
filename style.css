@@ -367,6 +367,8 @@ body {
   justify-content: center;
   align-items: flex-end;
   pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 88%, rgba(0, 0, 0, 0.4) 96%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 88%, rgba(0, 0, 0, 0.4) 96%, transparent 100%);
 }
 
 .hero-portrait {
