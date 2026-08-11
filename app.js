@@ -556,12 +556,44 @@ document.addEventListener('DOMContentLoaded', () => {
       navMenu.classList.toggle('active');
     });
 
-    // Close mobile nav menu when any link is clicked
+    // Close mobile nav menu when any link is clicked & handle scroll active states
     navMenuLinks.forEach(link => {
-      link.addEventListener('click', () => {
+      link.addEventListener('click', (e) => {
         mobileNavToggle.classList.remove('active');
         navMenu.classList.remove('active');
+
+        // Update active class
+        navMenuLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+
+        // Home button smooth scroll to top
+        const href = link.getAttribute('href');
+        if (href === '#' || href === '#home') {
+          e.preventDefault();
+          if (lenis) {
+            lenis.scrollTo(0);
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }
       });
+    });
+  }
+
+  // Also bind main logo to scroll to top (Home)
+  const siteLogo = document.querySelector('.logo');
+  if (siteLogo) {
+    siteLogo.addEventListener('click', (e) => {
+      e.preventDefault();
+      navMenuLinks.forEach(l => l.classList.remove('active'));
+      const homeBtn = document.querySelector('.nav-link[href="#"], .nav-link[href="#home"]');
+      if (homeBtn) homeBtn.classList.add('active');
+      
+      if (lenis) {
+        lenis.scrollTo(0);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     });
   }
 
