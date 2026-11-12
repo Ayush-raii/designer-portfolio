@@ -1888,3 +1888,192 @@ section {
   border-radius: 12px;
   margin-top: 2rem;
 }
+
+/* ==========================================================================
+   PORTFOLIO SWITCHER FLOATING WIDGET & NAV BUTTONS
+   ========================================================================== */
+
+.nav-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1.15rem;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  margin-left: 0.5rem;
+}
+
+.nav-switch-btn.pro-switch {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: none;
+}
+
+.nav-switch-btn.pro-switch:hover {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.nav-switch-btn.design-switch {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: none;
+}
+
+.nav-switch-btn.design-switch:hover {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+/* Floating Switcher Widget */
+.portfolio-switch-widget {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9990;
+}
+
+.switch-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.7rem 1.3rem 0.7rem 1rem;
+  background: rgba(18, 20, 29, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50px;
+  text-decoration: none;
+  color: var(--text-primary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.switch-pill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: 0.6s ease;
+}
+
+.switch-pill:hover::before {
+  left: 100%;
+}
+
+.switch-pill:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(96, 165, 250, 0.5);
+  box-shadow: 0 15px 40px rgba(37, 99, 235, 0.25), 0 0 20px rgba(96, 165, 250, 0.2);
+}
+
+.switch-pulse-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.switch-pulse-dot.pro {
+  background-color: #3b82f6;
+  box-shadow: 0 0 10px #3b82f6;
+}
+
+.switch-pulse-dot.design {
+  background-color: #e50914;
+  box-shadow: 0 0 10px #e50914;
+}
+
+.switch-pulse-dot::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  opacity: 0.8;
+  animation: pulsePing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes pulsePing {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.switch-icon {
+  font-size: 1.2rem;
+}
+
+.switch-text-wrap {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.switch-sub {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.switch-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.switch-arrow {
+  font-size: 1rem;
+  color: #3b82f6;
+  transition: transform 0.3s ease;
+}
+
+.switch-pill:hover .switch-arrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+  .portfolio-switch-widget {
+    bottom: 1.2rem;
+    right: 1.2rem;
+  }
+  
+  .switch-sub {
+    display: none;
+  }
+  
+  .switch-pill {
+    padding: 0.6rem 1rem;
+    gap: 0.6rem;
+  }
+  
+  .switch-title {
+    font-size: 0.78rem;
+  }
+}

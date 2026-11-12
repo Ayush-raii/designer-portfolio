@@ -4,6 +4,19 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // URL Hash Auto-Routing (#professional and #design)
+  if (window.location.hash === '#professional' || window.location.hash === '#pro') {
+    if (!window.location.pathname.endsWith('professional.html')) {
+      window.location.href = 'professional.html';
+      return;
+    }
+  } else if (window.location.hash === '#design' || window.location.hash === '#creative') {
+    if (window.location.pathname.endsWith('professional.html')) {
+      window.location.href = 'index.html';
+      return;
+    }
+  }
+
   // 0. RAI LABS Animated Title Intro Reveal
   const preloader = document.getElementById('preloader');
   if (preloader) {
@@ -70,14 +83,74 @@ document.addEventListener('DOMContentLoaded', () => {
       tools: 'Adobe Photoshop'
     },
     'tudar': {
-      title: 'Tudar club Registration poster',
-      tags: 'Event Design / Cultural Branding / Poster',
-      description: 'A vibrant event promotional poster designed for "Tudar", the Tulu cultural fest organized at NMAM Institute of Technology, NITTE. The composition features an ornate scroll element set against a rich green backdrop, celebrating the Tulu community\'s heritage. The bilingual layout blends Tulu script with English, presenting a warm and festive invitation to the cultural gathering. The design incorporates traditional motifs and the official NITTE branding.',
+      title: 'Tudar Club Registration Poster',
+      tags: 'Tudar / Event Design / Cultural Branding',
+      description: 'A vibrant event promotional poster designed for "Tudar", the Tulu cultural club and fest organized at NMAM Institute of Technology, NITTE. The composition features an ornate scroll element set against a rich green backdrop, celebrating the Tulu community\'s heritage. The bilingual layout blends Tulu script with English, presenting a warm and festive invitation to the cultural gathering.',
       images: [
         'assets/assetstudar_poster.jpeg'
       ],
       deliverables: 'Event Poster, Bilingual Layout, Cultural Branding Asset',
       tools: 'Adobe Photoshop'
+    },
+    'tudar-marnemi': {
+      title: 'Marnemi Da Eddeppulu - Festival Poster',
+      tags: 'Tudar / Festive Poster / Visual Art',
+      description: 'A festive poster designed for Tudar club to celebrate Navratri and Dussehra (Marnemi) across Tulunad. The composition highlights the resplendent Mangalore Dasara Sharada deity adorned in traditional gold ornaments and floral garlands, backlit with warm ambient illumination and traditional Pili Nalike (tiger dance) background art textures.',
+      images: [
+        'assets/tudar_marnemi.jpg'
+      ],
+      deliverables: 'Festival Poster Art, Social Media Creative, Traditional Typography Layout',
+      tools: 'Adobe Photoshop, Lightroom'
+    },
+    'tudar-attemi': {
+      title: 'Attemi Da Eddeppulu - Krishna Janmashtami',
+      tags: 'Tudar / Digital Art / Festive Poster',
+      description: 'A vibrant cultural poster designed for Krishna Janmashtami (Attemi) for Tudar. Features an illustration of infant Krishna asleep on Adisesha in a wooden vessel over sacred waters, framed with rich green gradients, peacock feather textures, and authentic Tulu calligraphy.',
+      images: [
+        'assets/tudar_attemi.jpg'
+      ],
+      deliverables: 'Digital Illustration Poster, Festival Creative, Tulu Script Lettering',
+      tools: 'Adobe Photoshop, Illustrator'
+    },
+    'tudar-nagarapanchami': {
+      title: 'Nagarapanchami Da Eddeppulu',
+      tags: 'Tudar / Heritage / Festival Poster',
+      description: 'A reverent cultural poster celebrating the sacred festival of Nagarapanchami in coastal Karnataka. The design centers around a carved serpent stone idol adorned with fresh jasmine (sevanthige) garlands and deep ceremonial green textures, embodying traditional spiritual heritage.',
+      images: [
+        'assets/tudar_nagarapanchami.jpg'
+      ],
+      deliverables: 'Festival Poster, Visual Direction, Typography Styling',
+      tools: 'Adobe Photoshop'
+    },
+    'tudar-tulu-lipi': {
+      title: 'Tulu Lipi Dinotha - Cultural Commemoration',
+      tags: 'Tudar / Typography / Cultural Poster',
+      description: 'Commemorative educational poster for Tulu Lipi Dinotha (Tulu Script Day) created for Tudar at NMAM Institute of Technology, Nitte. Highlights academic preservation of the indigenous Tulu lipi script with bilingual headings and portraiture honoring pioneering linguistic scholars.',
+      images: [
+        'assets/tudar_tulu_lipi_dinotha.jpg'
+      ],
+      deliverables: 'Commemorative Poster, Academic Branding, Tulu Calligraphy Layout',
+      tools: 'Adobe Photoshop, Illustrator'
+    },
+    'tudar-su-paniyaadi': {
+      title: 'S.U. Paniyaadi - Official Language Tribute',
+      tags: 'Tudar / Editorial / Cultural Tribute',
+      description: 'An editorial tribute poster honoring literary legend S.U. Paniyaadi and his historic advocacy for Tulu as an official state language ("Tulu Nana Karnataka Rajyoda Adhikrutha Raajya Baase"). Designed for Tudar, blending classical portraiture, historic motifs, and dignified typography.',
+      images: [
+        'assets/tudar_su_paniyaadi.jpg'
+      ],
+      deliverables: 'Tribute Poster Design, Typography Layout, Historical Heritage Art',
+      tools: 'Adobe Photoshop'
+    },
+    'tudar-president': {
+      title: 'Tudar Executive Board - President Announcement',
+      tags: 'Tudar / Leadership Poster / Photo Manipulation',
+      description: 'Official announcement poster introducing Gagan R Rai as President (2025-26) of Tudar at NMAMIT. Features composite photography blending the executive president portrait wearing the ceremonial Jai Tulunad stole with team archives and energetic brushed typography.',
+      images: [
+        'assets/tudar_president_gagan_rai.jpg'
+      ],
+      deliverables: 'Executive Announcement Poster, Photo Retouching & Composite, Social Creative',
+      tools: 'Adobe Photoshop, Lightroom'
     }
   };
 
@@ -132,10 +205,10 @@ document.addEventListener('DOMContentLoaded', () => {
       cursor.style.top = `${cursorY}px`;
     });
 
-    // Smooth follow effect for follower
+    // Tight, crisp follow effect for follower (eliminates wobble)
     function updateFollower() {
-      followerX += (cursorX - followerX) * 0.15;
-      followerY += (cursorY - followerY) * 0.15;
+      followerX += (cursorX - followerX) * 0.45;
+      followerY += (cursorY - followerY) * 0.45;
 
       follower.style.left = `${followerX}px`;
       follower.style.top = `${followerY}px`;
@@ -177,10 +250,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
 
-        // Pull elements slightly towards cursor
+        // Subtle pull towards cursor (reduced offset for natural hover)
         gsap.to(el, {
-          x: x * 0.35,
-          y: y * 0.35,
+          x: x * 0.08,
+          y: y * 0.08,
           duration: 0.3,
           ease: 'power2.out'
         });
@@ -190,8 +263,8 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.to(el, {
           x: 0,
           y: 0,
-          duration: 0.5,
-          ease: 'elastic.out(1, 0.3)'
+          duration: 0.4,
+          ease: 'power2.out'
         });
       });
     });
@@ -269,21 +342,24 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Staggered fade-up for section headers and work cards
-    const fadeUpTriggers = ['.section-header', '.work-item', '.service-item', '.about-container', '.contact-wrap'];
+    // Staggered fade-up for section headers, cards and work items
+    const fadeUpTriggers = [
+      '.section-header', '.work-item', '.service-item', '.about-container', '.contact-wrap',
+      '.pro-sec-head', '.metric-block', '.timeline-card-clean', '.skill-box', '.pro-card-clean', '.contact-box-clean', '.proj-card-clean'
+    ];
     fadeUpTriggers.forEach(selector => {
       const elements = document.querySelectorAll(selector);
       elements.forEach(element => {
         gsap.fromTo(element,
-          { y: 60, opacity: 0 },
+          { y: 40, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 1,
+            duration: 0.8,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: element,
-              start: 'top 85%',
+              start: 'top 88%',
               toggleActions: 'play none none none'
             }
           }
@@ -382,213 +458,118 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Close modal on clicking outside content (on the modal backdrop area)
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeProjectModal();
-  });
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeProjectModal();
+    });
+  }
 
-  // Category Filter Engine (Option 1)
+  // Category Filter Engine
   const filterBtns = document.querySelectorAll('.filter-btn');
   const workItems = document.querySelectorAll('.work-item');
+
+  function applyFilter(filterValue) {
+    const filter = (filterValue || 'poster').toLowerCase();
+    workItems.forEach(item => {
+      const itemCategory = (item.getAttribute('data-category') || '').toLowerCase();
+      const categories = itemCategory.split(/\s+/);
+      if (filter === 'all' || categories.includes(filter)) {
+        item.classList.remove('hidden');
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+  }
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      const filterValue = btn.getAttribute('data-filter');
+      const filterValue = (btn.getAttribute('data-filter') || '').toLowerCase();
+      applyFilter(filterValue);
 
       workItems.forEach(item => {
-        const itemCategory = item.getAttribute('data-category');
-        if (filterValue === 'all' || itemCategory === filterValue) {
-          item.classList.remove('hidden');
-          if (typeof gsap !== 'undefined') {
-            gsap.fromTo(item, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
-          }
-        } else {
-          item.classList.add('hidden');
+        if (!item.classList.contains('hidden') && typeof gsap !== 'undefined') {
+          gsap.fromTo(item, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' });
         }
       });
     });
   });
 
-  // Interactive & Persistent Review System (Option 3 Dynamic)
-  const addReviewForm = document.getElementById('add-review-form');
-  const reviewsContainer = document.getElementById('reviews-container');
-  const noReviewsMsg = document.getElementById('no-reviews-msg');
-  const starBtns = document.querySelectorAll('.star-btn');
-  const ratingInput = document.getElementById('reviewer-rating');
-
-  // Interactive Star Selection
-  if (starBtns.length > 0) {
-    starBtns.forEach(star => {
-      star.addEventListener('click', () => {
-        const rating = star.getAttribute('data-rating');
-        ratingInput.value = rating;
-
-        starBtns.forEach(s => {
-          if (parseInt(s.getAttribute('data-rating')) <= parseInt(rating)) {
-            s.classList.add('active');
-          } else {
-            s.classList.remove('active');
-          }
-        });
-      });
-    });
+  // Apply default active filter ('poster') on page load
+  const initialActiveBtn = document.querySelector('.filter-btn.active');
+  if (initialActiveBtn) {
+    applyFilter(initialActiveBtn.getAttribute('data-filter'));
+  } else {
+    applyFilter('poster');
   }
 
-  // Load Reviews from LocalStorage
-  function loadSavedReviews() {
-    const saved = localStorage.getItem('rai_portfolio_reviews');
-    const reviews = saved ? JSON.parse(saved) : [];
-
-    if (!reviewsContainer) return;
-
-    reviewsContainer.innerHTML = '';
-
-    if (reviews.length === 0) {
-      if (noReviewsMsg) noReviewsMsg.style.display = 'block';
-    } else {
-      if (noReviewsMsg) noReviewsMsg.style.display = 'none';
-
-      reviews.forEach((r) => {
-        const starsStr = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
-        const card = document.createElement('div');
-        card.className = 'review-card';
-        card.innerHTML = `
-          <div class="review-stars">${starsStr}</div>
-          <p class="review-text">"${escapeHtml(r.text)}"</p>
-          <div class="review-author">
-            <span class="author-name">${escapeHtml(r.name)}</span>
-            <span class="author-role">${escapeHtml(r.role || 'Visitor')}</span>
-          </div>
-        `;
-        reviewsContainer.appendChild(card);
-      });
-    }
-  }
-
-  // Admin Helper: Expose deleteReview to browser console for Admin control
-  window.deleteReview = function (index) {
-    const existing = JSON.parse(localStorage.getItem('rai_portfolio_reviews') || '[]');
-    if (index >= 0 && index < existing.length) {
-      const removed = existing.splice(index, 1);
-      localStorage.setItem('rai_portfolio_reviews', JSON.stringify(existing));
-      loadSavedReviews();
-      console.log(`✅ Admin: Removed review by "${removed[0].name}"`);
-    } else {
-      console.log(`❌ Admin: Review at index ${index} not found.`);
-    }
-  };
-
-  window.deleteReviewByName = function (reviewerName) {
-    const existing = JSON.parse(localStorage.getItem('rai_portfolio_reviews') || '[]');
-    const filtered = existing.filter(r => r.name.toLowerCase() !== reviewerName.toLowerCase());
-    localStorage.setItem('rai_portfolio_reviews', JSON.stringify(filtered));
-    loadSavedReviews();
-    console.log(`✅ Admin: Removed reviews matching name "${reviewerName}"`);
-  };
-
-  function escapeHtml(str) {
-    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-  }
-
-  // Review Modal Popup Logic
-  const openReviewModalBtn = document.getElementById('open-review-modal-btn');
-  const closeReviewModalBtn = document.getElementById('close-review-modal-btn');
-  const reviewModal = document.getElementById('review-modal');
-
-  function openReviewModal() {
-    if (reviewModal) reviewModal.classList.add('active');
-  }
-
-  function closeReviewModal() {
-    if (reviewModal) reviewModal.classList.remove('active');
-  }
-
-  if (openReviewModalBtn) openReviewModalBtn.addEventListener('click', openReviewModal);
-  if (closeReviewModalBtn) closeReviewModalBtn.addEventListener('click', closeReviewModal);
-
-  if (reviewModal) {
-    reviewModal.addEventListener('click', (e) => {
-      if (e.target === reviewModal) closeReviewModal();
-    });
-  }
-
-  // Handle Form Submission
-  if (addReviewForm) {
-    addReviewForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const name = document.getElementById('reviewer-name').value.trim();
-      const role = document.getElementById('reviewer-role').value.trim();
-      const rating = parseInt(document.getElementById('reviewer-rating').value) || 5;
-      const text = document.getElementById('reviewer-text').value.trim();
-
-      if (!name || !text) return;
-
-      const newReview = { name, role, rating, text, date: new Date().toISOString() };
-
-      const existing = JSON.parse(localStorage.getItem('rai_portfolio_reviews') || '[]');
-      existing.unshift(newReview); // Newest review on top
-      localStorage.setItem('rai_portfolio_reviews', JSON.stringify(existing));
-
-      // Reset form
-      addReviewForm.reset();
-      ratingInput.value = '5';
-      starBtns.forEach(s => s.classList.add('active'));
-
-      // Close Modal and Re-render reviews list
-      closeReviewModal();
-      loadSavedReviews();
-    });
-  }
-
-  loadSavedReviews();
-
-  // Mobile Navigation Drawer Toggle
+  // Comprehensive Header Navigation & Scroll-Spy Active Indicator
   const mobileNavToggle = document.getElementById('mobile-nav-toggle');
   const navMenu = document.getElementById('nav-menu');
-  const navMenuLinks = document.querySelectorAll('.nav-links .nav-link');
+  const allNavLinks = document.querySelectorAll('.nav-links .nav-link');
 
-  if (mobileNavToggle && navMenu) {
-    mobileNavToggle.addEventListener('click', () => {
-      mobileNavToggle.classList.toggle('active');
-      navMenu.classList.toggle('active');
-    });
+  function updateActiveNavLink(targetHref) {
+    allNavLinks.forEach(l => l.classList.remove('active'));
+    if (targetHref) {
+      const matchingLink = Array.from(allNavLinks).find(l => l.getAttribute('href') === targetHref);
+      if (matchingLink) matchingLink.classList.add('active');
+    }
+  }
 
-    // Close mobile nav menu when any link is clicked & handle scroll active states
-    navMenuLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
+  // Bind click handlers to all nav links (Desktop + Mobile)
+  allNavLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (mobileNavToggle && navMenu) {
         mobileNavToggle.classList.remove('active');
         navMenu.classList.remove('active');
+      }
 
-        // Update active class
-        navMenuLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
+      const href = link.getAttribute('href');
 
-        // Home button smooth scroll to top
-        const href = link.getAttribute('href');
-        if (href === '#' || href === '#home') {
-          e.preventDefault();
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        updateActiveNavLink(href);
+
+        if (href === '#' || href === '#home' || href === '#top') {
           if (lenis) {
             lenis.scrollTo(0);
           } else {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }
+        } else {
+          const targetElem = document.querySelector(href);
+          if (targetElem) {
+            const headerOffset = 80;
+            const elementPosition = targetElem.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = elementPosition - headerOffset;
+
+            if (lenis) {
+              lenis.scrollTo(offsetPosition);
+            } else {
+              window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            }
+          }
         }
-      });
+      }
+    });
+  });
+
+  // Mobile Hamburger Toggle
+  if (mobileNavToggle && navMenu) {
+    mobileNavToggle.addEventListener('click', () => {
+      mobileNavToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
     });
   }
 
-  // Also bind main logo to scroll to top (Home)
+  // Bind Main Logo to scroll top
   const siteLogo = document.querySelector('.logo');
   if (siteLogo) {
     siteLogo.addEventListener('click', (e) => {
       e.preventDefault();
-      navMenuLinks.forEach(l => l.classList.remove('active'));
-      const homeBtn = document.querySelector('.nav-link[href="#"], .nav-link[href="#home"]');
-      if (homeBtn) homeBtn.classList.add('active');
-      
+      updateActiveNavLink('#');
       if (lenis) {
         lenis.scrollTo(0);
       } else {
@@ -596,5 +577,26 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // ScrollSpy: Update active nav link dynamically as user scrolls down the page
+  const pageSections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let currentSectionId = '#';
+    const scrollPosition = window.scrollY + 120;
+
+    pageSections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        currentSectionId = '#' + section.getAttribute('id');
+      }
+    });
+
+    if (window.scrollY < 200) {
+      currentSectionId = '#';
+    }
+
+    updateActiveNavLink(currentSectionId);
+  });
 
 });
